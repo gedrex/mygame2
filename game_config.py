@@ -36,11 +36,11 @@ FERTILITY_CHANCES = [900, 900, 700, 700, 400, 300, 100, 0, 0, 0] #  In this case
 ################################
 
 BRANCHES_TREE = {
-###  Name                   : [ group, product, consumption[[Branch, ammount]], evolution[[Name, needs efectivity, stock]] ]
-    "Agriculture"           : { "group": "Agriculture", "product": "Basic Food", "consumption": [], "evolution": [] },
-    "Handworking"           : { "group": "Handworking", "product": "Basic Tools", "consumption": [["Agriculture", 3]], "evolution": [["Agriculture", 5, 1000]] },
-    "Vegetable production"  : { "group": "Agriculture", "product": "Veggies", "consumption": [["Handworking", 1]], "evolution": [["Agriculture", 5, 2000], ["Handworking", 5, 2000]] },
-    "Meat production"       : { "group": "Agriculture", "product": "Meat", "consumption": [["Handworking", 1], ["Agriculture", 2]], "evolution": [["Handworking", 5, 2000], ["Agriculture", 6, 5000]] }
+###  Name                   : [ group, product, efectivity, stock, consumption[[Branch, ammount]], evolution[[Name, needs efectivity, stock]] ]
+    "Agriculture"           : { "group": "Agriculture", "product": "Basic Food", "efectivity": 1, "stock": 0, "consumption": [], "evolution": [], "people in branch:": 0, "cummulative_efectivity": 0 },
+    "Handworking"           : { "group": "Handworking", "product": "Basic Tools", "efectivity": 1, "stock": 0, "consumption": [["Agriculture", 3]], "evolution": [["Agriculture", 5, 1000]], "people in branch:": 0, "cummulative_efectivity": 0 },
+    "Vegetable production"  : { "group": "Agriculture", "product": "Veggies", "efectivity": 1, "stock": 0, "consumption": [["Handworking", 1]], "evolution": [["Agriculture", 5, 2000], ["Handworking", 5, 2000]], "people in branch:": 0, "cummulative_efectivity": 0 },
+    "Meat production"       : { "group": "Agriculture", "product": "Meat", "efectivity": 1, "stock": 0, "consumption": [["Handworking", 1], ["Agriculture", 2]], "evolution": [["Handworking", 5, 2000], ["Agriculture", 6, 5000]], "people in branch:": 0, "cummulative_efectivity": 0 }
 }
 
 

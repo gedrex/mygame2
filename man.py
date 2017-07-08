@@ -2,6 +2,7 @@
 import game_config as config
 from industry import EVOLVED
 from random import randrange
+from possibilities import events
 """
 Human being class and it's attributes and mechanics
 """
@@ -21,10 +22,21 @@ class Human(object):
         self.siblings = []  # -- <list of objects> list of objects with same parents
         self.partner = None  # -- <object> almost every human can get some partner at the fertility age
         self.fertility_age = config.FERTILITY_AGE  # -- <int> fertile age starts at... will be changed with evolution
+        self.efectivity = 1  # -- <int> how efective is a person
+        self.learning_skill = 5  # per how many year man increase efectivity
+
+    def increase_efectivity(self):
+        self.efectivity += 1
 
     def choose_profession(self):
         if self.parents == []:
             self.profession = EVOLVED[0]
+        elif events.choose_new_profession():
+            return EVOLVED[randrange(len(EVOLVED))]
+        else:
+            if self.parents[0].efectivity > 2:
+                self.__setattr__("efectivity", int(self.parents[0].efectivity/3))
+            return self.parents[0].profession
 
     def choose_partner(self, partners):
         """Choose from list of human objects 
@@ -44,6 +56,9 @@ class Human(object):
         if self.partner is not None:
             self.partner.partner = None
         del self
+
+    def print_human_attributes(self):
+        print(self.__dict__)
 
     def __repr__(self):
         return '{name}'.format(name=self.name)

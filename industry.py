@@ -34,16 +34,16 @@ class Industry(object):
         if self.name == "Agriculture":
             EVOLVED.append(self)
 
-    def evolve(self, branch):
-        EVOLVED.append(branch)
+    def evolve(self):
+        EVOLVED.append(self)
 
-    def check_for_evolution(self, branch):
+    def check_for_evolution(self):
         ready_to_evolve = 0
-        for need in branch.evolution:
+        for need in self.evolution:
             for evolved_branch in EVOLVED:
                 if (evolved_branch.name == need[0]) & (need[1] <= evolved_branch.efectivity) & (need[2] <= evolved_branch.stock):
                     ready_to_evolve += 1
-        if ready_to_evolve == len(branch.evolution):
+        if ready_to_evolve == len(self.evolution):
             return True
 
     def manipulate_efectivity(self, efectivity):
@@ -52,5 +52,16 @@ class Industry(object):
     def manipulate_stock(self, stock):
         self.stock += stock
 
+    def produce(self, human_efectivity):
+        ammount_of_produced = human_efectivity * self.efectivity
+        self.manipulate_stock(ammount_of_produced)
+
+    def consume(self):
+        for consume_item in self.consumption:
+            for evolved_branch in EVOLVED:
+                if evolved_branch.name == consume_item[0]:
+                    evolved_branch.manipulate_stock(-consume_item[1])
+
     def __repr__(self):
-        return '{name}'.format(name=self.name)
+        return '{name}'.format(name=self.__hash__())
+
